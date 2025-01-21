@@ -1,8 +1,8 @@
 stages:
   - installation
   - build-app
+  - code-check
   - test-app
-  - security-check
   - docker-image-building
   - trivy-image-scan
   - docker-image-push
@@ -10,7 +10,7 @@ stages:
 
 
 
-tools_installation:
+.tools_installation:
   stage: installation
   script:
 
@@ -29,8 +29,8 @@ tools_installation:
     - currency
 
 
-Scanning file-system with trivy:
-  stage: security-check
+.Scanning file-system with trivy:
+  stage: code-check
   script: 
     - trivy fs --format table -o fs.html .
   tags:
@@ -40,8 +40,8 @@ Scanning file-system with trivy:
       - fs.html
     when: always
 
-sonarqube-check:
-  stage: security-check
+.sonarqube-check:
+  stage: code-check
   image: 
     name: sonarsource/sonar-scanner-cli:latest
   variables:
@@ -56,3 +56,12 @@ sonarqube-check:
   allow_failure: true
   only:
     - main
+
+Building Docker Image:
+  stage: docker-image-building
+  script:
+    - docker build -t jayesh0706/currency:0.1 . 
+  tags:
+    - multi
+
+  
