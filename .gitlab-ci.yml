@@ -62,6 +62,6 @@ Building Docker Image:
   script:
     - docker build -t jayesh0706/currency:0.1 . 
   tags:
-    - multi
+    - currency
 
   
