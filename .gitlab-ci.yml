@@ -64,4 +64,18 @@ Building Docker Image:
   tags:
     - currency
 
-  
+Scanning Image:
+  stage: trivy-image-scan
+  script:
+    - trivy image --severity HIGH,CRITICAL jayesh0706/currency:0.1 
+  allow_failure: false
+  tags:
+    - currency
+
+Pushing-docker image:
+  stage: docker-image-push
+  script:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - docker push jayesh0706/currency:0.1
+  tags:
+    - currency
