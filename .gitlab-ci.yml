@@ -16,9 +16,9 @@ tools_installation:
 
     - sudo yum install docker -y 
     - sudo systemctl start docker
-    - sudo chmod 666 /var/run/docker.sock  #to avoid giving sudo permission every time to user
+    - sudo chmod 666 /var/run/docker.sock  
 
-    # Add Trivy repository and install 
+     
     - echo "[trivy]" | sudo tee /etc/yum.repos.d/trivy.repo
     - echo "name=Trivy repository" | sudo tee -a /etc/yum.repos.d/trivy.repo
     - echo "baseurl=https://aquasecurity.github.io/trivy-repo/rpm/releases/7/\$basearch/" | sudo tee -a /etc/yum.repos.d/trivy.repo
