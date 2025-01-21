@@ -35,6 +35,10 @@ Scanning file-system with trivy:
     - trivy fs --format table -o fs.html .
   tags:
     - currency
+  artifacts:
+    paths:
+      - fs.html
+    when: always
 
 
 
