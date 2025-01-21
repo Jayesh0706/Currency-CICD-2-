@@ -29,4 +29,12 @@ tools_installation:
     - currency
 
 
+Scanning file-system with trivy:
+  stage: security-check
+  script: 
+    - trivy fs --format table -o fs.html .
+  tags:
+    - currency
+
+
 
