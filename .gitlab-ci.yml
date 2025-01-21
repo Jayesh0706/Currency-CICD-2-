@@ -12,7 +12,7 @@ stages:
 
 tools_installation:
   stage: installation
-  scripts:
+  script:
 
     - sudo yum install docker -y 
     - sudo systemctl start docker
