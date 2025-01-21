@@ -41,6 +41,7 @@ Scanning file-system with trivy:
     when: always
 
 sonarqube-check:
+  stage: security-check
   image: 
     name: sonarsource/sonar-scanner-cli:latest
   variables:
