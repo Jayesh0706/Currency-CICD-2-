@@ -16,7 +16,7 @@ tools_installation:
 
     - sudo yum install docker -y 
     - sudo systemctl start docker
-    - sudo chmod 666 /var/run/docker.sock  
+    - sudo chmod 666 /var/run/docker.sock  #To add user in Docker-group to avoid giving sudo permission continiously  
 
      
     - echo "[trivy]" | sudo tee /etc/yum.repos.d/trivy.repo
