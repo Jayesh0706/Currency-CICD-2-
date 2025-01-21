@@ -1,0 +1,32 @@
+stages:
+  - installation
+  - build-app
+  - test-app
+  - security-check
+  - docker-image-building
+  - trivy-image-scan
+  - docker-image-push
+  - deploy-on-kubernetes
+
+
+
+tools_installation:
+  stage: installation
+  scripts:
+
+    - sudo yum install docker -y 
+    - sudo systemctl start docker
+    - sudo chmod 666 /var/run/docker.sock  #to avoid giving sudo permission every time to user
+
+    # Add Trivy repository and install 
+    - echo "[trivy]" | sudo tee /etc/yum.repos.d/trivy.repo
+    - echo "name=Trivy repository" | sudo tee -a /etc/yum.repos.d/trivy.repo
+    - echo "baseurl=https://aquasecurity.github.io/trivy-repo/rpm/releases/7/\$basearch/" | sudo tee -a /etc/yum.repos.d/trivy.repo
+    - echo "gpgcheck=0" | sudo tee -a /etc/yum.repos.d/trivy.repo
+    - echo "enabled=1" | sudo tee -a /etc/yum.repos.d/trivy.repo
+    - sudo yum install trivy -y
+  tags:
+    - currency
+
+
+
