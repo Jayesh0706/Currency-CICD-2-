@@ -10,7 +10,7 @@ stages:
 
 
 
-tools_installation:
+.tools_installation:
   stage: installation
   script:
 
