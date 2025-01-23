@@ -84,7 +84,7 @@ Pushing-docker image:
 K8s-deploy:
   stage: deploy-on-kubernetes
   variables:
-    KUBECONFIG_PATH: home/ubuntu/.kube/config
+    KUBECONFIG_PATH: /home/ubuntu/.kube/config
   before_script:
     - mkdir -p $(dirname "KUBECONFIG_PATH")
     - echo "$KUBECONFIG_CONTENT" | base64 -d > "$KUBECONFIG_PATH"
