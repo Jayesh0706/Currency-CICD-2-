@@ -57,14 +57,14 @@ stages:
   only:
     - main
 
-Building Docker Image:
+.Building Docker Image:
   stage: docker-image-building
   script:
     - docker build -t jayesh0706/currency:0.1 . 
   tags:
     - currency
 
-Scanning Image:
+.Scanning Image:
   stage: trivy-image-scan
   script:
     - trivy image --severity HIGH,CRITICAL jayesh0706/currency:0.1 
@@ -84,9 +84,9 @@ Pushing-docker image:
 K8s-deploy:
   stage: deploy-on-kubernetes
   variables:
-    KUBECONFIG_PATH: /home/ubuntu/.kube/config
+    KUBECONFIG_PATH: /home/ubuntu/.kube/config  # Ensure this path is correct for your environment
   before_script:
-    - mkdir -p $(dirname "KUBECONFIG_PATH")
+    - mkdir -p $(dirname "$KUBECONFIG_PATH")   # This ensures the directory is created
     - echo "$KUBECONFIG_CONTENT" | base64 -d > "$KUBECONFIG_PATH"
     - export KUBECONFIG="$KUBECONFIG_PATH"
   script:
