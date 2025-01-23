@@ -79,3 +79,19 @@ Pushing-docker image:
     - docker push jayesh0706/currency:0.1
   tags:
     - currency
+
+
+K8s-deploy:
+  stage: deploy-on-kubernetes
+  variables:
+    KUBECONFIG_PATH: home/ubuntu/.kube/config
+  before_script:
+    - mkdir -p $(dirname "KUBECONFIG_PATH")
+    - echo "$KUBECONFIG_CONTENT" | base64 -d > "$KUBECONFIG_PATH"
+    - export KUBECONFIG="$KUBECONFIG_PATH"
+  script:
+    - kubectl apply -f deployment-service.yaml
+  tags:
+    - currency
+  only:
+    - main
