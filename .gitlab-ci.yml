@@ -29,7 +29,7 @@ stages:
     - currency
 
 
-Scanning file-system with trivy:
+.Scanning file-system with trivy:
   stage: code-check
   script: 
     - trivy fs --format table -o fs.html .
@@ -40,7 +40,7 @@ Scanning file-system with trivy:
       - fs.html
     when: always
 
-sonarqube-check:
+.sonarqube-check:
   stage: code-check
   image: 
     name: sonarsource/sonar-scanner-cli:latest
