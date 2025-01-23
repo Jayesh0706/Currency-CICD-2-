@@ -14,9 +14,9 @@ tools_installation:
   stage: installation
   script:
 
-    - sudo yum install docker -y 
-    - sudo systemctl start docker
-    - sudo chmod 666 /var/run/docker.sock  #To add user in Docker-group to avoid giving sudo permission continiou  
+    - yum install docker -y 
+    - systemctl start docker
+    - chmod 666 /var/run/docker.sock  #To add user in Docker-group to avoid giving sudo permission continiou  
 
      
     - echo "[trivy]" | sudo tee /etc/yum.repos.d/trivy.repo
