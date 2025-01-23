@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: currency-deployment
+spec:
+  selector:
+    matchLabels:
+      webapp: currency
+  replicas: 2 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        webapp: currency
+    spec:
+      containers:
+        - name: currency-container
+          image: jayesh0706/currency:0.1 # Image that will be used to containers in the cluster
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080 # The port that the container is running on in the cluster
+
+
+---
+
+apiVersion: v1 # Kubernetes API version
+kind: Service # Kubernetes resource kind we are creating
+metadata: # Metadata of the resource kind we are creating
+  name: currency-service
+spec:
+  selector:
+    webapp: currency
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 8080 
+      nodePort: 30008
+  type: NodePort
