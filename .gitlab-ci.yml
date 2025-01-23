@@ -89,6 +89,9 @@ K8s-deploy:
     - mkdir -p $(dirname "$KUBECONFIG_PATH")   # This ensures the directory is created
     - echo "$KUBECONFIG_CONTENT" | base64 -d > "$KUBECONFIG_PATH"
     - export KUBECONFIG="$KUBECONFIG_PATH"
+    - curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+    - chmod +x ./kubectl
+    - mv ./kubectl /usr/local/bin/kubectl
   script:
     - kubectl apply -f deployment-service.yaml
   tags:
