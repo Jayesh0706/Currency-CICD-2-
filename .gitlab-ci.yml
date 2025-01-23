@@ -14,7 +14,7 @@ tools_installation:
   stage: installation
   script:
 
-    - yum install docker -y 
+    - sudo yum install docker -y 
     - systemctl start docker
     - chmod 666 /var/run/docker.sock  #To add user in Docker-group to avoid giving sudo permission continiou  
 
