@@ -74,6 +74,8 @@ stages:
 
 Pushing-docker image:
   stage: docker-image-push
+  before_script:
+    - chmod 666 /var/run/docker.sock
   script:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - docker push jayesh0706/currency:0.1
