@@ -29,7 +29,7 @@ stages:
     - currency
 
 
-.Scanning file-system with trivy:
+Scanning file-system with trivy:
   stage: code-check
   script: 
     - trivy fs --format table -o fs.html .
@@ -40,7 +40,7 @@ stages:
       - fs.html
     when: always
 
-.sonarqube-check:
+sonarqube-check:
   stage: code-check
   image: 
     name: sonarsource/sonar-scanner-cli:latest
@@ -57,14 +57,14 @@ stages:
   only:
     - main
 
-.Building Docker Image:
+Building Docker Image:
   stage: docker-image-building
   script:
     - docker build -t jayesh0706/currency:0.1 . 
   tags:
     - currency
 
-.Scanning Image:
+Scanning Image:
   stage: trivy-image-scan
   script:
     - trivy image --severity HIGH,CRITICAL jayesh0706/currency:0.1 
